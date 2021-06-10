@@ -199,13 +199,25 @@ def main(username, password):
             return 1, '打卡失败'
     except:
         return 1, '打卡数据提交失败'
+    
+def checkin(cookies):
+    url = "https://glados.rocks/api/user/checkin"
+    s = requests.session()
+    headers = {
+        'cookie': cookies
+        # 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36'
+    }
+    r = s.post(url,headers=headers, data={"token":"glados_network"})
+    return r.status_code, json.loads(r.text)['message']
 
 
 if __name__ == "__main__":
     username = os.environ['USERNAME']
     password = os.environ['PASSWORD']
-
+    cookies = os.environ['COOKIES']
+    
     ret, msg = main(username, password)
+    sta_code, msg2 = checkin(cookies)
     print(ret, msg)
     if ret == 1:
         time.sleep(5)
@@ -214,7 +226,7 @@ if __name__ == "__main__":
 
     dingtalk_token = os.environ.get('DINGTALK_TOKEN')
     if dingtalk_token:
-        ret = message.dingtalk(msg, dingtalk_token)
+        ret = message.dingtalk(msg+msg2, dingtalk_token)
         print('send_dingtalk_message', ret)
 
     serverchan_key = os.environ.get('SERVERCHAN_KEY')
