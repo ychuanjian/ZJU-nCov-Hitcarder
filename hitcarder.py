@@ -226,7 +226,7 @@ if __name__ == "__main__":
 
     dingtalk_token = os.environ.get('DINGTALK_TOKEN')
     if dingtalk_token:
-        ret = message.dingtalk(msg+msg2, dingtalk_token)
+        ret = message.dingtalk('浙大打卡：'+msg+'\r\nGlaDos打卡：'+msg2, dingtalk_token)
         print('send_dingtalk_message', ret)
 
     serverchan_key = os.environ.get('SERVERCHAN_KEY')
