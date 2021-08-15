@@ -216,25 +216,25 @@ if __name__ == "__main__":
     password = os.environ['PASSWORD']
     cookies = os.environ['COOKIES']
     
-    ret, msg = main(username, password)
+#     ret, msg = main(username, password)
     sta_code, msg2 = checkin(cookies)
-    print(ret, msg)
-    if ret == 1:
-        time.sleep(5)
-        ret, msg = main(username, password)
-        print(ret, msg)
+#     print(ret, msg)
+#     if ret == 1:
+#         time.sleep(5)
+#         ret, msg = main(username, password)
+#         print(ret, msg)
 
     dingtalk_token = os.environ.get('DINGTALK_TOKEN')
     if dingtalk_token:
-        ret = message.dingtalk('浙大打卡：'+msg+'\r\nGlaDos打卡：'+msg2, dingtalk_token)
+        ret = message.dingtalk('浙大打卡：由于学校政策已关闭，需手动打卡'+'\r\nGlaDos打卡：'+msg2, dingtalk_token)
         print('send_dingtalk_message', ret)
 
-    serverchan_key = os.environ.get('SERVERCHAN_KEY')
-    if serverchan_key:
-        ret = message.serverchan(msg, '', serverchan_key)
-        print('send_serverChan_message', ret)
+#     serverchan_key = os.environ.get('SERVERCHAN_KEY')
+#     if serverchan_key:
+#         ret = message.serverchan(msg, '', serverchan_key)
+#         print('send_serverChan_message', ret)
 
-    pushplus_token = os.environ.get('PUSHPLUS_TOKEN')
-    if pushplus_token:
-        ret = message.pushplus(msg, '', pushplus_token)
-        print('send_pushplus_message', ret)
+#     pushplus_token = os.environ.get('PUSHPLUS_TOKEN')
+#     if pushplus_token:
+#         ret = message.pushplus(msg, '', pushplus_token)
+#         print('send_pushplus_message', ret)
