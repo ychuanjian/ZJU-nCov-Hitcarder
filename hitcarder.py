@@ -216,17 +216,16 @@ if __name__ == "__main__":
     password = os.environ['PASSWORD']
     cookies = os.environ['COOKIES']
     
-#     ret, msg = main(username, password)
-    sta_code, msg2 = checkin(cookies)
-#     print(ret, msg)
-#     if ret == 1:
-#         time.sleep(5)
-#         ret, msg = main(username, password)
-#         print(ret, msg)
+    ret, msg = main(username, password)
+    print(ret, msg)
+    if ret == 1:
+        time.sleep(5)
+        ret, msg = main(username, password)
+        print(ret, msg)
 
     dingtalk_token = os.environ.get('DINGTALK_TOKEN')
     if dingtalk_token:
-        ret = message.dingtalk('浙大打卡：由于学校政策已关闭，需手动打卡'+'\r\nGlaDos打卡：'+msg2, dingtalk_token)
+        ret = message.dingtalk('浙大打卡：'+'\r\n', dingtalk_token)
         print('send_dingtalk_message', ret)
 
 #     serverchan_key = os.environ.get('SERVERCHAN_KEY')
